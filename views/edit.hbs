@@ -1,0 +1,191 @@
+{{>header}}
+
+<title>CRUD | Edit Employee</title>
+
+</head>
+
+{{>navbar}}
+
+<div class="container my-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header text-white text-center" style="background-color: #1e293b;">
+            <h5 class="mb-0">Update Employee Record</h5>
+        </div>
+        <div class="card-body p-4">
+            <form action="/update/{{data._id}}" method="post" enctype="multipart/form-data">
+                <div class="row">
+
+                    <!-- Name -->
+                    <div class="col-12 mb-3">
+                        <label class="form-label fw-semibold">
+                            Full Name <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" name="name" value="{{data.name}}" placeholder="Enter full name" minlength="2"
+                            required
+                            class="form-control {{#if errorMessage.name}}border-danger{{else}}border-secondary{{/if}}">
+
+                        {{#if errorMessage.name}}
+                        <div class="text-danger small mt-1">
+                            {{errorMessage.name}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Email <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="email" name="email" value="{{data.email}}" placeholder="example@gmail.com" required
+                            class="form-control {{#if errorMessage.email}}border-danger{{else}}border-secondary{{/if}}">
+
+                        {{#if errorMessage.email}}
+                        <div class="text-danger small mt-1">
+                            {{errorMessage.email}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Phone Number <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" name="phone" value="{{data.phone}}" placeholder="10 digit phone number"
+                            maxlength="10" pattern="[0-9]{10}" inputmode="numeric" required
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                            class="form-control {{#if errorMessage.phone}}border-danger{{else}}border-secondary{{/if}}">
+
+                        {{#if errorMessage.phone}}
+                        <div class="text-danger small mt-1">
+                            {{errorMessage.phone}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- Designation -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Designation <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" name="designation" value="{{data.designation}}"
+                            placeholder="e.g. MERN Developer" required
+                            class="form-control {{#if errorMessage.designation}}border-danger{{else}}border-secondary{{/if}}">
+
+                        {{#if errorMessage.designation}}
+                        <div class="text-danger small mt-1">
+                            {{errorMessage.designation}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- Salary -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            Salary <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="number" name="salary" value="{{data.salary}}" placeholder="Enter salary" min="0"
+                            required
+                            class="form-control {{#if errorMessage.salary}}border-danger{{else}}border-secondary{{/if}}">
+
+                        {{#if errorMessage.salary}}
+                        <div class="text-danger small mt-1">
+                            {{errorMessage.salary}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+
+                    <!-- City -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            City
+                        </label>
+
+                        <input type="text" name="city" value="{{data.city}}" placeholder="Enter city"
+                            class="form-control border-secondary">
+                    </div>
+
+
+                    <!-- State -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">
+                            State
+                        </label>
+
+                        <input type="text" name="state" value="{{data.state}}" placeholder="Enter state"
+                            class="form-control border-secondary">
+                    </div>
+
+
+                    <!-- Employee Photo -->
+                    <div class="col-12 mb-3">
+
+                        <label for="photo" class="form-label fw-semibold">
+                            Employee Photo
+                        </label>
+
+                        {{#if data.photo}}
+
+                        <div class="mb-3">
+                            <img src="{{data.photo}}" alt="{{data.name}}" width="100" height="100"
+                                class="rounded-circle border shadow-sm" style="object-fit: cover;">
+                        </div>
+
+                        {{else}}
+
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
+                                style="width: 100px; height: 100px;">
+                                <i class="bi bi-person-fill fs-1"></i>
+                            </div>
+                        </div>
+
+                        {{/if}}
+
+                        <input type="file" class="form-control" id="photo" name="photo" accept=".jpg,.jpeg,.png,.webp">
+
+                        <div class="form-text">
+                            Select a new photo only if you want to change the existing photo.
+                            JPG, JPEG, PNG or WEBP — Maximum 2 MB
+                        </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="col-12 mt-2">
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/" class="btn btn-outline-primary flex-fill">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="btn btn-primary flex-fill">
+                                <i class="bi bi-pencil-square"></i>
+                                Update Employee
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+{{>footer}}

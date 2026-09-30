@@ -1,0 +1,781 @@
+{{>header}}
+
+<title>CRUD | Employee Management</title>
+
+</head>
+
+{{>navbar}}
+{{#if success}}
+
+<div class="alert alert-success alert-dismissible fade show shadow-sm mx-3 mx-md-4 mt-3" role="alert">
+    <i class="bi bi-check-circle-fill me-2"></i>
+    {{success}}
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{{/if}}
+<script>
+    setTimeout(function () {
+        const alert = document.querySelector(".alert-success")
+
+        if (alert) {
+            const bsAlert = bootstrap.Alert.getOrCreateInstance(alert)
+            bsAlert.close()
+        }
+    }, 3000)
+</script>
+<div class="container-fluid my-4 px-3 px-md-4">
+    <!-- Dashboard Statistics -->
+    <div class="row g-3 mb-4">
+
+        <!-- Total Employees -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">Total Employees</p>
+                            <h3 class="fw-bold mb-0">{{totalEmployees}}</h3>
+                        </div>
+
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3">
+                            <i class="bi bi-people-fill fs-4"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Total Salary -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">Total Salary</p>
+                            <h3 class="fw-bold mb-0">₹{{totalSalary}}</h3>
+                        </div>
+
+                        <div class="bg-success bg-opacity-10 text-success rounded-3 p-3">
+                            <i class="bi bi-currency-rupee fs-4"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Average Salary -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">Average Salary</p>
+                            <h3 class="fw-bold mb-0">₹{{averageSalary}}</h3>
+                        </div>
+
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3">
+                            <i class="bi bi-bar-chart-fill fs-4"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Total Designations -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">Designations</p>
+                            <h3 class="fw-bold mb-0">{{totalDesignations}}</h3>
+                        </div>
+
+                        <div class="bg-info bg-opacity-10 text-info rounded-3 p-3">
+                            <i class="bi bi-briefcase-fill fs-4"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Dashboard Statistics End -->
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+        <div>
+            <h3 class="fw-bold mb-1">Employee Management</h3>
+            <p class="text-muted mb-0">
+                Manage employee records efficiently
+            </p>
+        </div>
+        <a href="/export" class="btn btn-success">
+            <i class="bi bi-download"></i>
+            Export CSV
+        </a>
+        <a href="/add" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i>
+            Add Employee
+        </a>
+
+    </div>
+
+
+    <!-- Search -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <form action="/" method="get">
+
+                <div class="row g-2 align-items-center">
+
+                    <!-- Search -->
+                    <div class="{{#if search}}col-md-6{{else}}col-md-7{{/if}}">
+
+                        <input type="text" name="search" value="{{search}}" class="form-control"
+                            placeholder="Search by name, email, phone, designation, city or state...">
+
+                    </div>
+
+
+                    <!-- Sort -->
+                    <div class="{{#if search}}col-md-4{{else}}col-md-3{{/if}}">
+
+                        <select name="sort" class="form-select" onchange="this.form.submit()">
+
+                            <option value="newest" {{#if sortNew}}selected{{/if}}>
+                                Newest First
+                            </option>
+
+                            <option value="oldest" {{#if sortOld}}selected{{/if}}>
+                                Oldest First
+                            </option>
+
+                            <option value="nameAsc" {{#if sortNameAsc}}selected{{/if}}>
+                                Name A - Z
+                            </option>
+
+                            <option value="nameDesc" {{#if sortNameDesc}}selected{{/if}}>
+                                Name Z - A
+                            </option>
+
+                            <option value="salaryAsc" {{#if sortSalaryAsc}}selected{{/if}}>
+                                Salary Low - High
+                            </option>
+
+                            <option value="salaryDesc" {{#if sortSalaryDesc}}selected{{/if}}>
+                                Salary High - Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Designation Filter -->
+                    <div class="col-md-3">
+
+                        <select name="designation" class="form-select">
+
+                            <option value="">
+                                All Designations
+                            </option>
+
+                            {{#each designations}}
+
+                            <option value="{{this}}">
+                                {{this}}
+                            </option>
+
+                            {{/each}}
+
+                        </select>
+
+                    </div>
+                    <!-- Search Button -->
+                    <div class="{{#if search}}col-md-2{{else}}col-md-2{{/if}}">
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search"></i>
+                            Search
+                        </button>
+
+                    </div>
+
+
+                    {{#if search}}
+
+                    <!-- Clear -->
+                    <div class="col-md-2">
+
+                        <a href="/" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-x-lg"></i>
+                            Clear
+                        </a>
+
+                    </div>
+
+                    {{/if}}
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Employee Chart -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-header text-white py-3" style="background-color: #1e293b;">
+            <h5 class="mb-0">
+                <i class="bi bi-bar-chart-fill me-2"></i>
+                Employees by Designation
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <div style="height: 300px;">
+                <canvas id="designationChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+    <!-- Employee Card -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header text-white py-3" style="background-color: #3e43ac;">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-0">
+                        Employee Records
+                    </h5>
+
+                    <small class="text-white-50">
+
+                        Total: {{totalEmployees}} employees
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Table -->
+        <div class="card-body p-0">
+
+            {{#if data.length}}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle mb-0">
+
+                    <thead class="table-light">
+
+                        <tr>
+                            <th class="text-center">
+                                Photo
+                            </th>
+
+                            <th class="text-center">
+                                Employee ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Designation
+                            </th>
+
+                            <th>
+                                Salary
+                            </th>
+
+                            <th>
+                                City
+                            </th>
+
+                            <th>
+                                State
+                            </th>
+
+                            <th class="text-center">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {{#each data}}
+
+                        <tr>
+                            <td class="text-center">
+
+                                {{#if photo}}
+
+                                <img src="{{photo}}" alt="{{name}}" width="50" height="50" class="rounded-circle border"
+                                    style="object-fit: cover;">
+
+                                {{else}}
+
+                                <div class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+
+                                {{/if}}
+
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-secondary">
+                                    {{displayEmployeeId}}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">
+                                    {{name}}
+                                </div>
+
+                            </td>
+                            <td>
+                                <a href="mailto:{{email}}" class="text-decoration-none">
+                                    <i class="bi bi-envelope-fill me-1"></i>
+                                    {{email}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="tel:{{this.phone}}" class="text-decoration-none">
+                                    <i class="bi bi-telephone-fill me-1"></i>
+                                    {{this.phone}}
+                                </a>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">
+                                    {{designation}}
+                                </span>
+                            </td>
+                            <td class="fw-semibold">
+                                ₹{{formattedSalary}}
+                            </td>
+                            <td>
+                                {{#if city}}
+
+                                {{city}}
+
+                                {{else}}
+
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+
+                                {{/if}}
+
+                            </td>
+
+
+                            <td>
+
+                                {{#if state}}
+
+                                {{state}}
+
+                                {{else}}
+
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+
+                                {{/if}}
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="d-flex justify-content-center gap-2">
+
+                                    <!-- Edit -->
+
+                                    <a href="/edit/{{_id}}" class="btn btn-sm btn-outline-primary"
+                                        title="Edit Employee">
+
+                                        <i class="bi bi-pencil"></i>
+
+                                    </a>
+                                    <!-- View -->
+
+                                    <a href="/details/{{_id}}" class="btn btn-sm btn-outline-info"
+                                        title="View Employee">
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </a>
+
+
+                                    <!-- Delete -->
+
+                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete Employee"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        data-delete-url="/delete/{{_id}}" data-employee-name="{{name}}"
+                                        data-employee-email="{{email}}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        {{/each}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pagination -->
+
+            {{#if totalPages}}
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-3">
+
+                <div class="text-muted small">
+
+                    Page {{currentPage}} of {{totalPages}}
+
+                </div>
+
+
+                <nav aria-label="Employee pagination">
+
+                    <ul class="pagination mb-0">
+
+                        <!-- Previous -->
+
+                        {{#if hasPrevious}}
+
+                        <li class="page-item">
+
+                            <a class="page-link" href="/?page={{previousPage}}&search={{search}}">
+                                Previous
+                            </a>
+
+                        </li>
+
+                        {{else}}
+
+                        <li class="page-item disabled">
+
+                            <span class="page-link">
+                                Previous
+                            </span>
+
+                        </li>
+
+                        {{/if}}
+
+
+                        <!-- Page Numbers -->
+
+                        {{#each pagination}}
+
+                        {{#if dots}}
+
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+
+                        {{else}}
+
+                        <li class="page-item {{#if active}}active{{/if}}">
+
+                            <a class="page-link" href="/?page={{number}}&search={{../search}}">
+                                {{number}}
+                            </a>
+
+                        </li>
+
+                        {{/if}}
+
+                        {{/each}}
+
+
+                        <!-- Next -->
+
+                        {{#if hasNext}}
+
+                        <li class="page-item">
+
+                            <a class="page-link" href="/?page={{nextPage}}&search={{search}}">
+                                Next
+                            </a>
+
+                        </li>
+
+                        {{else}}
+
+                        <li class="page-item disabled">
+
+                            <span class="page-link">
+                                Next
+                            </span>
+
+                        </li>
+
+                        {{/if}}
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+            {{/if}}
+
+
+            {{else}}
+
+            <!-- Empty State -->
+
+            <div class="text-center py-5 px-3">
+
+                <i class="bi bi-people display-4 text-primary"></i>
+
+                <h5 class="mt-3">
+                    No Employees Found
+                </h5>
+
+                <p class="text-muted">
+
+                    {{#if search}}
+
+                    No employee records match "{{search}}".
+
+                    {{else}}
+
+                    Start by adding your first employee record.
+
+                    {{/if}}
+
+                </p>
+
+                {{#if search}}
+
+                <a href="/" class="btn btn-outline-primary">
+                    Clear Search
+                </a>
+
+                {{else}}
+
+                <a href="/add" class="btn btn-primary">
+                    <i class="bi bi-person-plus"></i>
+                    Add Employee
+                </a>
+
+                {{/if}}
+
+            </div>
+
+            {{/if}}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Delete Confirmation Modal -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="deleteModalLabel">
+
+                    <i class="bi bi-exclamation-triangle text-danger"></i>
+
+                    Confirm Delete
+
+                </h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <p class="mb-2">
+                    Are you sure you want to delete this employee?
+                </p>
+
+                <div class="alert alert-light border mb-0">
+
+                    <strong id="deleteEmployeeName">
+                        Employee
+                    </strong>
+
+                    <br>
+
+                    <small class="text-muted" id="deleteEmployeeEmail"></small>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <form id="confirmDeleteForm" method="POST" class="m-0">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        Delete Employee
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const designationLabels = [
+        {{#each designations}}
+            "{{this}}",
+        {{/each}}
+    ]
+
+    const designationData = [
+        {{#each designationCounts}}
+            {{this}},
+        {{/each}}
+    ]
+
+    const chartCanvas = document.getElementById("designationChart")
+
+    if (chartCanvas && designationLabels.length > 0) {
+
+        new Chart(chartCanvas, {
+
+            type: "bar",
+
+            data: {
+                labels: designationLabels,
+
+                datasets: [{
+                    label: "Employees",
+                    data: designationData,
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+
+            }
+
+        })
+
+    }
+
+</script>
+
+
+<!-- Delete Modal Script -->
+<script>
+
+    const deleteModal = document.getElementById("deleteModal")
+
+    if (deleteModal) {
+
+        deleteModal.addEventListener("show.bs.modal", function (event) {
+
+            const button = event.relatedTarget
+
+            const deleteUrl = button.getAttribute("data-delete-url")
+            const employeeName = button.getAttribute("data-employee-name")
+            const employeeEmail = button.getAttribute("data-employee-email")
+
+            const deleteForm = document.getElementById("confirmDeleteForm")
+            const nameElement = document.getElementById("deleteEmployeeName")
+            const emailElement = document.getElementById("deleteEmployeeEmail")
+
+            deleteForm.action = deleteUrl
+
+            nameElement.textContent = employeeName
+
+            emailElement.textContent = employeeEmail
+
+        })
+
+    }
+
+</script>
+
+{{>footer}}

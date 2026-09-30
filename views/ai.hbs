@@ -1,0 +1,668 @@
+{{>header}}
+
+<title>CRUD | AI Assistant</title>
+
+</head>
+
+{{>navbar}}
+
+<div class="container py-4">
+
+    <!-- AI Header -->
+    <div class="text-center mb-4">
+
+        <div class="mb-2">
+            <i class="bi bi-robot text-primary" style="font-size: 45px;"></i>
+        </div>
+
+        <h2 class="fw-bold mb-1">
+            AI Assistant
+        </h2>
+
+        <p class="text-muted mb-0">
+            Ask questions about your employee records
+        </p>
+
+    </div>
+
+
+    <!-- Suggested Questions Card -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center mb-4">
+
+                <div class="category-icon bg-warning-subtle text-warning me-3">
+                    <i class="bi bi-lightbulb-fill"></i>
+                </div>
+
+                <div>
+                    <h5 class="fw-bold mb-1">
+                        Suggested Questions
+                    </h5>
+
+                    <small class="text-muted">
+                        Click any question to get an instant AI answer
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- Employees -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-primary-subtle text-primary me-3">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Employees
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    How many employees are there?
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Give me a summary of all employees.
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Salary -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-success-subtle text-success me-3">
+                                    <i class="bi bi-currency-rupee"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Salary
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Who has the highest salary?
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    What is the average salary?
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Designation -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-info-subtle text-info me-3">
+                                    <i class="bi bi-code-slash"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Designation
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Show all Full Stack Developers.
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    How many developers are there?
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Location -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-danger-subtle text-danger me-3">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Location
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Which employees are from Delhi?
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Which cities do employees belong to?
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Employee Details -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-purple-subtle text-purple me-3">
+                                    <i class="bi bi-person-vcard-fill"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Employee Details
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Tell me about an employee.
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Show employee contact details.
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Analytics -->
+                <div class="col-md-6">
+
+                    <div class="question-category card h-100 border shadow-sm">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="category-icon bg-dark-subtle text-dark me-3">
+                                    <i class="bi bi-bar-chart-fill"></i>
+                                </div>
+
+                                <h6 class="fw-bold mb-0">
+                                    Analytics
+                                </h6>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Which designation has the most employees?
+                                </button>
+
+                                <button type="button" class="btn btn-light text-start example-question">
+                                    Give me salary statistics.
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Ask Question Card -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center mb-3">
+
+                <div class="category-icon bg-primary-subtle text-primary me-3">
+                    <i class="bi bi-chat-dots-fill"></i>
+                </div>
+
+                <div>
+
+                    <h5 class="fw-bold mb-1">
+                        Ask your question
+                    </h5>
+
+                    <small class="text-muted">
+                        Type your own question about employee records
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <textarea id="aiPrompt" class="form-control" rows="4"
+                placeholder="Example: Who has the highest salary?"></textarea>
+
+
+            <div class="d-flex justify-content-end mt-3">
+
+                <button type="button" id="askAiBtn" class="btn btn-primary px-4">
+
+                    <i class="bi bi-stars me-2"></i>
+
+                    Ask AI
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- AI Response -->
+    <div id="aiResponseBox" class="card border-0 shadow-sm mb-4 d-none">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center mb-3">
+
+                <div class="category-icon bg-primary-subtle text-primary me-3">
+                    <i class="bi bi-robot"></i>
+                </div>
+
+                <div>
+
+                    <h5 class="fw-bold mb-1">
+                        AI Response
+                    </h5>
+
+                    <small class="text-muted">
+                        Generated from your employee records
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div id="aiResponse"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+    .question-category {
+        transition: all 0.25s ease;
+        border-radius: 12px;
+    }
+
+    .question-category:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10) !important;
+    }
+
+
+    .category-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 20px;
+    }
+
+
+    .bg-purple-subtle {
+        background-color: #f3e8ff;
+    }
+
+    .text-purple {
+        color: #9333ea;
+    }
+
+
+    .example-question {
+        font-size: 14px;
+        border: 1px solid #e5e7eb;
+
+        transition: all 0.2s ease;
+    }
+
+
+    .example-question:hover {
+        background-color: #f8fafc;
+        border-color: #2563eb;
+        color: #2563eb;
+    }
+
+
+    #aiPrompt {
+        resize: vertical;
+        border-radius: 10px;
+    }
+
+
+    #aiPrompt:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.12);
+    }
+
+
+    #askAiBtn {
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+
+    #askAiBtn:hover {
+        transform: translateY(-1px);
+    }
+
+
+    .ai-answer {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        line-height: 1.7;
+    }
+</style>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const aiPrompt = document.getElementById("aiPrompt")
+
+        const askAiBtn = document.getElementById("askAiBtn")
+
+        const aiResponseBox =
+            document.getElementById("aiResponseBox")
+
+        const aiResponse =
+            document.getElementById("aiResponse")
+
+
+        const exampleQuestions =
+            document.querySelectorAll(".example-question")
+
+
+        // Suggested Question Click
+        exampleQuestions.forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                const question =
+                    this.innerText.trim()
+
+
+                // Put question inside textarea
+                aiPrompt.value = question
+
+
+                // Automatically ask AI
+                askAI(question)
+
+            })
+
+        })
+
+
+        // Ask AI Button
+        askAiBtn.addEventListener("click", function () {
+
+            const question =
+                aiPrompt.value.trim()
+
+
+            if (!question) {
+
+                alert("Please enter a question.")
+
+                aiPrompt.focus()
+
+                return
+
+            }
+
+
+            askAI(question)
+
+        })
+
+
+        // AI Function
+        async function askAI(question) {
+
+            // Show response area
+            aiResponseBox.classList.remove("d-none")
+
+
+            // Show loading
+            aiResponse.innerHTML = `
+
+                <div class="ai-answer p-4 text-center">
+
+                    <div
+                        class="spinner-border text-primary"
+                        role="status"
+                    ></div>
+
+                    <div class="mt-2 text-muted">
+
+                        AI is thinking...
+
+                    </div>
+
+                </div>
+
+            `
+
+
+            // Disable button
+            askAiBtn.disabled = true
+
+
+            try {
+
+                const response = await fetch("/ai/ask", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        prompt: question
+                    })
+
+                })
+
+
+                const data = await response.json()
+
+
+                console.log("AI Response:", data)
+
+
+                if (data.success === true) {
+
+                    aiResponse.innerHTML = `
+
+                        <div class="ai-answer p-4">
+
+                            <div class="fw-semibold mb-3">
+
+                                <i
+                                    class="bi bi-robot text-primary me-2"
+                                ></i>
+
+                                AI Answer
+
+                            </div>
+
+                            <div>
+
+                                ${formatAIResponse(data.answer)}
+
+                            </div>
+
+                        </div>
+
+                    `
+
+                } else {
+
+                    aiResponse.innerHTML = `
+
+                        <div class="alert alert-danger mb-0">
+
+                            <i
+                                class="bi bi-exclamation-triangle me-2"
+                            ></i>
+
+                            ${data.message ||
+                        "Unable to get AI response."}
+
+                        </div>
+
+                    `
+
+                }
+
+
+            } catch (error) {
+
+                console.error("AI Error:", error)
+
+
+                aiResponse.innerHTML = `
+
+                    <div class="alert alert-danger mb-0">
+
+                        <i
+                            class="bi bi-exclamation-triangle me-2"
+                        ></i>
+
+                        Unable to connect with AI server.
+
+                    </div>
+
+                `
+
+            } finally {
+
+                askAiBtn.disabled = false
+
+            }
+
+        }
+
+
+        // Format AI Answer
+        function formatAIResponse(text) {
+
+            if (!text) {
+
+                return "No answer received."
+
+            }
+
+
+            return text
+
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+
+                .replace(/\n/g, "<br>")
+
+        }
+
+    })
+
+</script>
+
+
+{{>footer}}

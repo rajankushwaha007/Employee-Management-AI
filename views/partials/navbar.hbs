@@ -1,0 +1,296 @@
+<body>
+
+    <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #2563eb;">
+
+        <div class="container-fluid">
+
+            <!-- Brand -->
+            <a class="navbar-brand text-light fw-bold" href="/">
+                <i class="bi bi-people-fill me-2"></i>
+                Employee Management
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <!-- Dashboard -->
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-semibold" href="/">
+                            <i class="bi bi-speedometer2 me-1"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <!-- Employees -->
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/">
+                            <i class="bi bi-person-lines-fill me-1"></i>
+                            Employees
+                        </a>
+                    </li>
+
+                    <!-- Add Employee -->
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/add">
+                            <i class="bi bi-person-plus-fill me-1"></i>
+                            Add Employee
+                        </a>
+                    </li>
+                    <a class="nav-link text-white" href="/ai">
+                        <i class="bi bi-robot me-1"></i>
+                        AI Assistant
+                    </a>
+
+                    <!-- Export -->
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/export">
+                            <i class="bi bi-file-earmark-arrow-down-fill me-1"></i>
+                            Export CSV
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Floating AI Assistant -->
+    <div class="ai-assistant-floating">
+
+        <!-- Orbiting Icons -->
+        <div class="ai-orbit">
+
+            <span class="ai-orbit-icon icon-1">
+                <i class="bi bi-chat-dots-fill"></i>
+            </span>
+
+            <span class="ai-orbit-icon icon-2">
+                <i class="bi bi-stars"></i>
+            </span>
+
+            <span class="ai-orbit-icon icon-3">
+                <i class="bi bi-bar-chart-fill"></i>
+            </span>
+
+            <span class="ai-orbit-icon icon-4">
+                <i class="bi bi-lightbulb-fill"></i>
+            </span>
+
+        </div>
+
+        <!-- Main AI Button -->
+        <a href="/ai" class="ai-main-button" title="Ask AI Assistant">
+
+            <i class="bi bi-robot"></i>
+
+        </a>
+
+        <!-- Tooltip -->
+        <div class="ai-tooltip">
+            Ask AI Assistant
+        </div>
+
+    </div>
+
+
+    <style>
+        /* Main Floating Container */
+        .ai-assistant-floating {
+            position: fixed;
+            left: 28px;
+            bottom: 28px;
+
+            width: 90px;
+            height: 90px;
+
+            z-index: 9999;
+        }
+
+
+        /* Main AI Button */
+        .ai-main-button {
+            position: absolute;
+
+            width: 64px;
+            height: 64px;
+
+            left: 13px;
+            top: 13px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(135deg,
+                    #2563eb,
+                    #1d4ed8);
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 0 15px rgba(37, 99, 235, 0.6),
+                0 0 35px rgba(37, 99, 235, 0.35);
+
+            z-index: 10;
+
+            transition: 0.3s ease;
+        }
+
+
+        /* Hover */
+        .ai-main-button:hover {
+            color: white;
+
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 20px rgba(37, 99, 235, 0.8),
+                0 0 45px rgba(37, 99, 235, 0.5);
+        }
+
+
+        /* Orbit Circle */
+        .ai-orbit {
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            left: 0;
+            top: 0;
+
+            border: 2px solid rgba(37, 99, 235, 0.25);
+
+            border-radius: 50%;
+
+            animation: aiRotate 8s linear infinite;
+        }
+
+
+        /* Orbit Icons */
+        .ai-orbit-icon {
+            position: absolute;
+
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 13px;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* Icon Positions */
+        .icon-1 {
+            top: -14px;
+            left: 31px;
+            background: #10b981;
+        }
+
+        .icon-2 {
+            right: -14px;
+            top: 31px;
+            background: #f59e0b;
+        }
+
+        .icon-3 {
+            bottom: -14px;
+            left: 31px;
+            background: #ec4899;
+        }
+
+        .icon-4 {
+            left: -14px;
+            top: 31px;
+            background: #8b5cf6;
+        }
+
+
+        /* Rotation */
+        @keyframes aiRotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* Tooltip */
+        .ai-tooltip {
+            position: absolute;
+
+            right: 5px;
+            bottom: 98px;
+
+            background: #172554;
+            color: white;
+
+            padding: 8px 13px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            opacity: 0;
+
+            transform: translateY(5px);
+
+            pointer-events: none;
+
+            transition: 0.25s ease;
+        }
+
+
+        /* Show Tooltip */
+        .ai-assistant-floating:hover .ai-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Mobile */
+        @media (max-width: 576px) {
+
+            .ai-assistant-floating {
+                left: 18px;
+                bottom: 18px;
+            }
+
+        }
+    </style>
