@@ -61,6 +61,14 @@
                     </li>
 
                 </ul>
+                <!-- Dark / Light Mode -->
+                <div class="d-flex align-items-center ms-auto">
+
+                    <button id="themeToggle" type="button" title="Toggle Theme">
+                        <span id="themeIcon" class="moon-icon"></span>
+                    </button>
+
+                </div>
 
             </div>
 
@@ -293,4 +301,122 @@
             }
 
         }
+
+        body {
+            background-color: #f8fafc;
+            color: #212529;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #111827;
+            color: #f1f5f9;
+        }
+
+        /* Cards */
+        body.dark-mode .card {
+            background-color: #1f2937;
+            color: #f1f5f9;
+            border-color: #374151;
+        }
+
+        /* Tables */
+        body.dark-mode .table {
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .table-light {
+            --bs-table-bg: #374151;
+            --bs-table-color: #ffffff;
+        }
+
+        /* Forms */
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background-color: #1f2937;
+            color: #f1f5f9;
+            border-color: #4b5563;
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Modal */
+        body.dark-mode .modal-content {
+            background-color: #1f2937;
+            color: #f1f5f9;
+        }
+
+        /* Text */
+        body.dark-mode .text-dark {
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-mode .text-muted {
+            color: #9ca3af !important;
+        }
+        #themeToggle:hover {
+            transform: scale(1.08);
+        }
+        /* Crescent Moon */
+        .moon-icon {
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            display: block;
+
+            position: relative;
+        }
+
+        /* Cut the right side of moon */
+
+        .moon-icon::after {
+            content: "";
+
+            position: absolute;
+
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            top: -5px;
+            left: 6px;
+        }
+        /* Dark mode */
+        body.dark-mode .moon-icon {
+            background: #facc15;
+        }
+        body.dark-mode .moon-icon::after {
+            background: #374151;
+        }
     </style>
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+        }
+
+        themeToggle.addEventListener("click", function () {
+
+            document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+
+        });
+    </script>
